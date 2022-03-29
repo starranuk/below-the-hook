@@ -10,28 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-#How to hide the django SECRET_KEY
-#https://stackoverflow.com/questions/15209978/where-to-store-secret-keys-django
-#Zack Plauché
-import os
-import dotenv # <- New
+# How to hide the django SECRET_KEY
+# https://www.youtube.com/watch?v=Nxa8wkELqJA
+# Kode Point
 
-# Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-# UPDATE secret key
-SECRET_KEY = os.environ['SECRET_KEY'] # Instead of your actual secret key
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+# UPDATE secret key
+
+SECRET_KEY = os.getenv('SECRET_KEY') # Instead of your actual secret key
+
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_extensions',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
