@@ -14,10 +14,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 # https://www.youtube.com/watch?v=Nxa8wkELqJA
 # Kode Point
 
+import os
 
 from pathlib import Path
 from dotenv import load_dotenv
-import os
+
 
 load_dotenv()
 
@@ -29,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 # UPDATE secret key
 
-SECRET_KEY = os.getenv('SECRET_KEY') # Instead of your actual secret key
+SECRET_KEY = os.getenv('SECRET_KEY') # SECRET_KEY stored in .env file and gitignored
 
 
 
@@ -117,7 +118,7 @@ WSGI_APPLICATION = 'below_the_hook.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
